@@ -23,8 +23,9 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'AuthController@login');
 });
 
-Route::get('/symptoms', 'SymptomsController@getAll');
-Route::post('/symptoms', 'SymptomsController@create');
-
 Route::middleware('auth:api')->group(function () {
+    Route::post('token/refresh', 'ApiTokenController@refresh');
+
+    Route::get('symptoms', 'SymptomsController@getAll');
+    Route::post('symptoms', 'SymptomsController@create');
 });

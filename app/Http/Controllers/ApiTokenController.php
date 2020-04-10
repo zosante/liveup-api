@@ -13,7 +13,7 @@ class ApiTokenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function update(Request $request)
+    public function refresh(Request $request)
     {
         $token = Str::random(60);
 
