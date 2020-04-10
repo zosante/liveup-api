@@ -25,7 +25,12 @@ class SymptomsController extends Controller
 
     public function create(Request $request)
     {
-        $data = $request->input([
+        $request->validate([
+            'name' => 'required|min:2|max:255|unique:symptoms,name',
+            'description' => 'required|min:2',
+        ]);
+
+        $data = $request->only([
             'name', 'description'
         ]);
 

@@ -22,7 +22,8 @@ Route::prefix('auth')->group(function () {
     Route::post('register', 'AuthController@register');
 });
 
-Route::get('symptoms', 'SymptomsController@getAll');
+Route::get('/symptoms', 'SymptomsController@getAll');
+Route::post('/symptoms', 'SymptomsController@create');
 
 Route::middleware('auth:api')->group(function () {
 });
