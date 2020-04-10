@@ -6,6 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * @package App
+ *
+ * @property string $api_token
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -18,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'api_token', 'password', 'remember_token',
     ];
 
     /**
