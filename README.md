@@ -12,15 +12,16 @@ or run from the terminal run:
 
 - `docker-compose build && docker-compose up -d --remove-orphans`
 
-## Continued development
+Then navigate to `localhost:8070`
 
+## Continued development
+### Branching
+Branch out from the main `master` branch with prefix e.g `feature/`, `bugfix/` and you'll have something like: `feature/add-to-readme`
+
+### Interaction usage
 Simply exec a terminal to interact with the docker container using
 
 - `docker-compose exec bash` or
 - `docker-compose exec sh` or
 
 > PS: These commands works on Unix systems only.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
