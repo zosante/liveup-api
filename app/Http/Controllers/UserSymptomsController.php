@@ -18,4 +18,21 @@ class UserSymptomsController extends Controller
             ->symptoms()
             ->save($symptom, $validated);
     }
+
+    public function getAll(Request $request)
+    {
+        $validated = $request->validate([
+            'severity' => 'nullable|int|between:0,10',
+        ]);
+
+        $user = $request->user();
+
+        return tap($user->symptoms(), function ($query) use ($validated) {
+            if ($validated['severity'] ?? false) {
+                $query->where([
+                    'severity' => $validated['severity'],
+                ]);
+            }
+        })->get();
+    }
 }
