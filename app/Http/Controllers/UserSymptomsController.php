@@ -35,4 +35,33 @@ class UserSymptomsController extends Controller
             }
         })->get();
     }
+
+    public function getOne($symptomId, Request $request)
+    {
+        $validated = $request->validate([
+            'severity' => 'nullable|int|between:0,10',
+            'with_records' => 'nullable|bool',
+        ]);
+
+        $user = $request->user();
+        $symptom = $user->symptoms()->findOrFail($symptomId);
+
+        return tap($symptom, function ($query) use ($user, $validated) {
+
+            if ($validated['with_records'] ?? false) {
+                $query->load(['records' => function ($query) use ($user, $validated) {
+
+                    $query->where(['user_id' => $user->id]);
+
+                    if ($validated['severity'] ?? false) {
+                        $query->where([
+                            'severity' => $validated['severity'],
+                        ]);
+                    }
+
+                }]);
+            }
+        });
+
+    }
 }
