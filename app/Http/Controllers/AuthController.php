@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -18,11 +17,14 @@ class AuthController extends Controller
             'password' => 'required|min:2|max:60',
         ]);
 
+        $validated['token'] = $this->getRandomToken();
+
         $user = $this->create($validated);
 
-        return response()->json(
-            $this->getUserWithToken($user)
-        );
+        return response()->json([
+            'user' => $user,
+            'token' => $validated['token']
+        ]);
     }
 
     public function login(Request $request)
@@ -41,15 +43,31 @@ class AuthController extends Controller
             ]);
         }
 
-        return response()->json($this->getUserWithToken($user));
+        return response()->json([
+            'user' => $user,
+            'token' => $this->updateUserToken($user)
+        ]);
     }
 
-    protected function getUserWithToken(User $user)
+    protected function updateUserToken(User $user)
     {
-        return [
-            'user' => Arr::except($user->toArray(), ['api_token']),
-            'token' => $user->api_token,
-        ];
+        $token = $this->getRandomToken();
+
+        $user->forceFill([
+            'api_token' => $this->generateHashed($token),
+        ])->save();
+
+        return $token;
+    }
+
+    protected function getRandomToken()
+    {
+        return Str::random(60);
+    }
+
+    protected function generateHashed(string $token): string
+    {
+        return hash('sha256', $token);
     }
 
     protected function create(array $data)
@@ -58,7 +76,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'api_token' => Str::random(60),
+            'api_token' => $this->generateHashed($data['token']),
         ]);
     }
 }
