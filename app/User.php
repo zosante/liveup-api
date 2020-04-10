@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Symptom;
+use App\Models\SymptomRecord;
 use App\Models\UserSymptom;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -44,8 +45,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Symptom::class)->withTimestamps();
     }
 
-    public function userSymptoms()
+    public function symptomRecords()
     {
-        return $this->hasMany(UserSymptom::class, 'user_id', 'id');
+        return $this->hasMany(SymptomRecord::class);
     }
 }

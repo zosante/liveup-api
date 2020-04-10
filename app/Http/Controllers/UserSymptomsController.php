@@ -14,20 +14,36 @@ class UserSymptomsController extends Controller
             'started_at' => 'nullable|date_format:Y-m-d H:i'
         ]);
 
-        return $request->user()
-            ->symptoms()
-            ->save($symptom, $validated);
+        if (!$request->user()->symptoms()->where('symptom_id', $symptom->id)->exists()) {
+            $request->user()
+                ->symptoms()
+                ->attach($symptom->id);
+        }
+
+        $request->user()
+            ->symptomRecords()
+            ->create(
+                $validated + [
+                    'symptom_id' => $symptom->id,
+                ]);
+
+        return $symptom;
     }
 
     public function getAll(Request $request)
+    {
+        return $request->user()->symptoms;
+    }
+
+    public function getAllRecords($symptom, Request $request)
     {
         $validated = $request->validate([
             'severity' => 'nullable|int|between:0,10',
         ]);
 
-        $user = $request->user();
+        $symptom = $request->user()->symptoms()->findOrFail($symptom->id);
 
-        return tap($user->symptoms(), function ($query) use ($validated) {
+        return tap($symptom->records(), function ($query) use ($validated) {
             if ($validated['severity'] ?? false) {
                 $query->where([
                     'severity' => $validated['severity'],

@@ -10,6 +10,6 @@ class Symptom extends Model
 
     public function records()
     {
-        return $this->hasMany(UserSymptom::class, 'symptom_id', 'id');
+        return $this->hasMany(SymptomRecord::class, 'symptom_id', 'id');
     }
 }

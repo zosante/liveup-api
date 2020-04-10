@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSymptomUserTable extends Migration
+class CreateSymptomRecordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,12 @@ class CreateSymptomUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('symptom_user', function (Blueprint $table) {
+        Schema::create('symptom_records', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('symptom_id');
+            $table->integer('severity');
+            $table->dateTime('started_at')->default(DB::raw('now()'));
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -29,8 +31,6 @@ class CreateSymptomUserTable extends Migration
                 ->references('id')
                 ->on('symptoms')
                 ->cascadeOnDelete();
-
-            $table->unique(['user_id', 'symptom_id'], 'symptom_user_index');
         });
     }
 
@@ -41,6 +41,6 @@ class CreateSymptomUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('symptom_user');
+        Schema::dropIfExists('symptom_records');
     }
 }
