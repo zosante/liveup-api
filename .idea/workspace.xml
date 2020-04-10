@@ -13,7 +13,7 @@
     </execution>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/laravel-dockerizer" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -37,6 +37,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -48,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1586526150390</updated>
       <workItem from="1586526151781" duration="428000" />
-      <workItem from="1586526819836" duration="431000" />
+      <workItem from="1586526819836" duration="962000" />
     </task>
     <servers />
   </component>
@@ -60,5 +66,9 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="384" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1586526820371" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1586527766212">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1586527766212" />
   </component>
 </project>
