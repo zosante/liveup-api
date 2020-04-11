@@ -22,6 +22,6 @@ class GroupUserController extends Controller
         $user = $request->user();
         $user_id = $request->get('user_id');
         $group = $user->groups()->where(['group_id'=>$group->id])->firstorFail();
-        $group->user()->attach($user_id);
+        return $group->users()->attach($user_id);
     }
 }

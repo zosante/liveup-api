@@ -13,7 +13,7 @@ class Group extends Model
 
     protected $primaryKey = 'id';
 
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class, "group_user");
     }

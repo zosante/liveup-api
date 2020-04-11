@@ -6,7 +6,6 @@ use App\Http\Controllers\GroupsController;
 use App\Models\Symptom;
 use App\Models\SymptomRecord;
 use App\Models\UserSymptom;
-use App\Models\GroupUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
