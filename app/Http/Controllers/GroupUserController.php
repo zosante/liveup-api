@@ -9,19 +9,17 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\AddGroupUserRequest;
 use App\Models\Group;
-use Illuminate\Http\Request;
 
 class GroupUserController extends Controller
 {
-    public function addGroupUser(Group $group, Request $request)
+    public function addGroupUser(Group $group, AddGroupUserRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required|int|exists:users,id',
-        ]);
-
         $user = $request->user();
+
         $user_id = $request->get('user_id');
+
         $group = $user->groups()->where(['group_id' => $group->id])->firstorFail();
 
         return tap($group, function ($group) use ($user_id) {
