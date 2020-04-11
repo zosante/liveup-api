@@ -29,6 +29,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
+
         $validated = $this->validate($request, [
             'email' => 'email|exists:users,email',
             'password' => 'required|min:2|max:60',

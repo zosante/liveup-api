@@ -31,7 +31,7 @@ class GroupsController extends Controller
 
     protected function createNewGroup(User $user, array $record)
     {
-        $group = Group::create($record + ["user_id" => $user->user_id, ]);
+        $group = Group::create(['user_id'=>$user->id, 'description'=>$record->description, 'name'=>$record->name]);
         return $user->groups()->attach($group->id);
     }
 
