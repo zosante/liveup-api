@@ -27,7 +27,7 @@ class SymptomsController extends Controller
     {
         $request->validate([
             'name' => 'required|min:2|max:255|unique:symptoms,name',
-            'description' => 'required|min:2',
+            'description' => 'nullable|min:2',
         ]);
 
         $data = $request->only([
