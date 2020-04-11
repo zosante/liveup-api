@@ -35,13 +35,13 @@ class UserSymptomsController extends Controller
         return $request->user()->symptoms;
     }
 
-    public function getAllRecords($symptom, Request $request)
+    public function getSymptomRecords($symptom, Request $request)
     {
         $validated = $request->validate([
             'severity' => 'nullable|int|between:0,10',
         ]);
 
-        $symptom = $request->user()->symptoms()->findOrFail($symptom->id);
+        $symptom = $request->user()->symptoms()->findOrFail($symptom);
 
         return tap($symptom->records(), function ($query) use ($validated) {
             if ($validated['severity'] ?? false) {
