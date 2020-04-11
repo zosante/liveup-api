@@ -11,4 +11,10 @@ class Group extends Model
     protected $guarded = ['id'];
 
     protected $primaryKey = 'id';
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class, "group_user");
+    }
+
 }

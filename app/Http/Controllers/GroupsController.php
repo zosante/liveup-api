@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 class GroupsController extends Controller
 {
 
-
     public function getAll(Request $request)
     {
         return $request->user()->groups()->get();
@@ -28,7 +27,6 @@ class GroupsController extends Controller
         ]);
         $user = $request->user();
         return $this->createNewGroup($user, $validated);
-
     }
 
     protected function createNewGroup(User $user, array $record)

@@ -32,7 +32,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('user/symptoms', 'UserSymptomsController@getAll');
     Route::post('user/creategroup', 'GroupsController@create');
     Route::get('user/groups', 'GroupsController@getAll');
-    Route::post('user/groupuser/{groupuser}', 'GroupUser@addGroupUser');
+    Route::post('user/groupuser/{group}', 'GroupUser@addGroupUser');
     Route::get('user/symptoms/{symptom}', 'UserSymptomsController@getOneFromList');
     Route::post('user/symptoms/{symptom}/records', 'UserSymptomsController@addSymptomRecord');
     Route::get(

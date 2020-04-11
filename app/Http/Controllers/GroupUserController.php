@@ -9,13 +9,20 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Group;
 use App\Models\GroupUser;
+use http\Env\Request;
 
 class GroupUserController extends Controller
 {
-    public function addGroupUser(GroupUser $groupuser)
+    public function addGroupUser(Group $group, Request $request)
     {
-
-        return GroupUser::create(['user_id'=>$groupuser->user_id,'group_id'=>$groupuser->group_id]);
+        $request->validate([
+            'user_id' => 'required|int|exists:users,id',
+        ]);
+        $user = $request->user();
+        $user_id = $request->get('user_id');
+        $group = $user->groups()->where(['group_id'=>$group->id])->firstorFail();
+        $group->users()->attach($user_id);
     }
 }
