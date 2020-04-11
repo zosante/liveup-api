@@ -17,7 +17,6 @@ class UsersTableSeeder extends BaseSeeder
         ], [
             'name' => $this->faker->name,
             'password' => bcrypt('KHJ97ysahisa8a09yo8diaugs8b'),
-            'api_token' => UserService::generateHashed(UserService::getRandomToken())
         ]);
 
         \App\User::updateOrCreate([
@@ -25,7 +24,6 @@ class UsersTableSeeder extends BaseSeeder
         ], [
             'name' => $this->faker->name,
             'password' => bcrypt('KHJ97ysahsisa8a09yoa8diaugsaawe8b'),
-            'api_token' => UserService::generateHashed(UserService::getRandomToken()),
         ]);
     }
 }
