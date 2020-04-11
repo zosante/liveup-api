@@ -26,6 +26,8 @@ class CreateGroupUserTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+
+            $table->unique(['group_id', 'user_id'], 'group_user_index');
         });
     }
 
