@@ -4,9 +4,10 @@ namespace App\Services;
 
 use App\Repositories\SymptomRepository;
 
-class SymptomsService
+class SymptomService
 {
     private SymptomRepository $symptomRepository;
+
     public function __construct(SymptomRepository $symptomRepository)
     {
         $this->symptomRepository = $symptomRepository;

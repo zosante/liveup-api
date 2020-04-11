@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Symptom;
-use App\Services\SymptomsService;
+use App\Services\SymptomService;
 use Illuminate\Http\Request;
 
 class SymptomsController extends Controller
 {
-    private SymptomsService $symptomsService;
-    public function __construct(SymptomsService $symptomsService)
+    private SymptomService $symptomService;
+
+    public function __construct(SymptomService $symptomService)
     {
-        $this->symptomsService = $symptomsService;
+        $this->symptomService = $symptomService;
     }
 
     public function getAll()
@@ -19,7 +20,7 @@ class SymptomsController extends Controller
         /**
          * Getting models through a service class
          */
-        return $this->symptomsService->getAll();
+        return $this->symptomService->getAll();
     }
 
     public function create(Request $request)
