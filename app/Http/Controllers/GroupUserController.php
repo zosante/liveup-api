@@ -19,9 +19,13 @@ class GroupUserController extends Controller
         $request->validate([
             'user_id' => 'required|int|exists:users,id',
         ]);
+
         $user = $request->user();
         $user_id = $request->get('user_id');
-        $group = $user->groups()->where(['group_id'=>$group->id])->firstorFail();
-        return $group->users()->attach($user_id);
+        $group = $user->groups()->where(['group_id' => $group->id])->firstorFail();
+
+        return tap($group, function ($group) use ($user_id) {
+            $group->users()->attach($user_id);
+        });
     }
 }

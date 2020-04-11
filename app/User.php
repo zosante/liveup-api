@@ -2,11 +2,8 @@
 
 namespace App;
 
-use App\Http\Controllers\GroupsController;
 use App\Models\Symptom;
 use App\Models\SymptomRecord;
-use App\Models\UserSymptom;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,5 +53,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany( Group::class,"group_user");
     }
-
 }
