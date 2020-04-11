@@ -10,8 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Group;
-use App\Models\GroupUser;
-use http\Env\Request;
+use Illuminate\Http\Request;
 
 class GroupUserController extends Controller
 {
@@ -23,6 +22,6 @@ class GroupUserController extends Controller
         $user = $request->user();
         $user_id = $request->get('user_id');
         $group = $user->groups()->where(['group_id'=>$group->id])->firstorFail();
-        $group->users()->attach($user_id);
+        $group->user()->attach($user_id);
     }
 }
