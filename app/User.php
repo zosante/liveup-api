@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\GroupsController;
 use App\Models\Symptom;
 use App\Models\SymptomRecord;
 use App\Models\UserSymptom;
@@ -9,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Group;
 
 /**
  * Class User
@@ -48,5 +50,10 @@ class User extends Authenticatable
     public function symptomRecords()
     {
         return $this->hasMany(SymptomRecord::class);
+    }
+
+    public function groups()
+    {
+        return $this->hasMany( Group::class);
     }
 }

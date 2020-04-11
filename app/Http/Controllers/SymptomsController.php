@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class SymptomsController extends Controller
 {
-    private SymptomsService $symptomsService;
-
+//    private SymptomsService $symptomsService;
+    private $symptomsService;
     public function __construct(SymptomsService $symptomsService)
     {
         $this->symptomsService = $symptomsService;

@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Mtrajano\LaravelSwagger\SwaggerServiceProvider::class,
         /*
          * Package Service Providers...
          */
