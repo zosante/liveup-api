@@ -42,8 +42,9 @@ class UserSymptomsController extends Controller
         ]);
 
         $symptom = $request->user()->symptoms()->findOrFail($symptom);
+        $records = $request->user()->symptomRecords()->where('symptom_id', $symptom->id);
 
-        return tap($symptom->records(), function ($query) use ($validated) {
+        return tap($records, function ($query) use ($validated) {
             if ($validated['severity'] ?? false) {
                 $query->where([
                     'severity' => $validated['severity'],
