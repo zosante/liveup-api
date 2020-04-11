@@ -9,11 +9,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\User;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
 {
-
     public function getAll(Request $request)
     {
         return $request->user()->groups()->get();
@@ -25,14 +25,19 @@ class GroupsController extends Controller
             'name' => 'required|min:2|max:255|unique:groups,user_id',
             'description' => 'required|min:2',
         ]);
+
         $user = $request->user();
+
         return $this->createNewGroup($user, $validated);
     }
 
     protected function createNewGroup(User $user, array $record)
     {
         $group = Group::create($record + ['user_id' => $user->id,]);
-        return $user->groups()->attach($group->id);
+
+        $user->groups()->attach($group->id);
+
+        return $group;
     }
 
 }
