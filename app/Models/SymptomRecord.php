@@ -15,4 +15,9 @@ class SymptomRecord extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function symptom()
+    {
+        return $this->belongsTo(Symptom::class);
+    }
 }

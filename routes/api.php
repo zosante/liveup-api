@@ -30,10 +30,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('symptoms', 'SymptomsController@create');
 
     Route::get('user/symptoms', 'UserSymptomsController@getAll');
+    
+    Route::get('user/symptoms/{symptom}', 'UserSymptomsController@getOneFromList');
 
-    Route::post('user/symptoms/{symptom}', 'UserSymptomsController@add');
-    Route::get('user/symptoms/{symptom}', 'UserSymptomsController@getOne');
-
+    Route::post('user/symptoms/{symptom}/records', 'UserSymptomsController@addSymptomRecord');
     Route::get(
         'user/symptoms/{symptom}/records',
         'UserSymptomsController@getSymptomRecords'
