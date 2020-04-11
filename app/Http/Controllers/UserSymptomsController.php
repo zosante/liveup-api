@@ -10,7 +10,7 @@ class UserSymptomsController extends Controller
 {
     public function getAll(Request $request)
     {
-        return $request->user()->symptoms;
+        return $request->user()->symptoms()->get();
     }
 
     public function getOneFromList($symptomId, Request $request)
