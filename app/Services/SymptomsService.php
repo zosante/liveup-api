@@ -6,8 +6,7 @@ use App\Repositories\SymptomRepository;
 
 class SymptomsService
 {
-//    private SymptomRepository $symptomRepository;
-    private  $symptomRepository;
+    private SymptomRepository $symptomRepository;
     public function __construct(SymptomRepository $symptomRepository)
     {
         $this->symptomRepository = $symptomRepository;

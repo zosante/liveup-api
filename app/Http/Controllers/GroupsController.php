@@ -15,32 +15,26 @@ class GroupsController extends Controller
 {
 
 
-    public function getOwnGroup(Request $request)
+    public function getAll(Request $request)
     {
-
-        return $request->user()->groups()->latest()->get();
+        return $request->user()->groups()->get();
     }
 
-    public function create(Request $request){
-
+    public function create(Request $request)
+    {
         $validated = $request->validate([
-
             'name' => 'required|min:2|max:255|unique:groups,user_id',
             'description' => 'required|min:2',
         ]);
-
         $user = $request->user();
-        return $this->createNewGroup($user, $validated );
-
+        return $this->createNewGroup($user, $validated);
 
     }
 
-
     protected function createNewGroup(User $user, array $record)
     {
-
-        return $user->groups()
-            ->create($record);
+        $group = Group::create($record + ["user_id" => $user->user_id, ]);
+        return $user->groups()->attach($group->id);
     }
 
 }
