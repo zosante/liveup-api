@@ -10,7 +10,7 @@ class UserSymptomsController extends Controller
 {
     public function getAll(Request $request)
     {
-        return $request->user()->symptoms()->get();
+        return $request->user()->symptoms()->latest()->get();
     }
 
     public function getOneFromList($symptomId, Request $request)
@@ -36,6 +36,7 @@ class UserSymptomsController extends Controller
                         ]);
                     }
 
+                    $query->latest();
                 }]);
             }
         });
@@ -56,7 +57,8 @@ class UserSymptomsController extends Controller
                     'severity' => $validated['severity'],
                 ]);
             }
-        })->get();
+        })->latest()
+            ->get();
     }
 
     public function addSymptomRecord(Symptom $symptom, Request $request)
