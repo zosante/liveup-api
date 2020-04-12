@@ -27,32 +27,29 @@ Route::any('tests', function (Request $request) {
     ];
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix('auth')->group(function () {
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
 });
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->name('api.')->group(function () {
     Route::post('token/refresh', 'ApiTokenController@refresh');
+
+    Route::prefix('/user')->name('user.')->group(function () {
+        Route::get('', function (Request $request) {
+            return $request->user();
+        });
+
+        Route::post('groups', 'GroupsController@create');
+        Route::get('groups', 'GroupsController@getAll');
+        Route::post('groups/{group}', 'GroupUserController@addGroupUser');
+
+        Route::get('symptoms', 'UserSymptomsController@getAll');
+        Route::get('symptoms/{symptom}', 'UserSymptomsController@getOneFromList');
+        Route::post('symptoms/{symptom}/records', 'UserSymptomsController@addSymptomRecord');
+        Route::get('symptoms/{symptom}/records','UserSymptomsController@getSymptomRecords');
+    });
 
     Route::get('symptoms', 'SymptomsController@getAll');
     Route::post('symptoms', 'SymptomsController@create');
-
-    Route::get('user/symptoms', 'UserSymptomsController@getAll');
-    Route::post('user/groups', 'GroupsController@create');
-    Route::get('user/groups', 'GroupsController@getAll');
-    Route::post('user/groups/{group}', 'GroupUserController@addGroupUser');
-
-    Route::get('user/symptoms/{symptom}', 'UserSymptomsController@getOneFromList');
-    Route::post('user/symptoms/{symptom}/records', 'UserSymptomsController@addSymptomRecord');
-    Route::get(
-        'user/symptoms/{symptom}/records',
-        'UserSymptomsController@getSymptomRecords'
-    );
-
-
 });
