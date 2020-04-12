@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return [
+        'Welcome to LiveUp API. Please check documentations or test you are connected with /api/tests endpoints.'
+    ];
+});
+
+Route::any('tests', function (Request $request) {
+    return [
+        'method' => $request->method(),
+        'data' => $request->all()
+    ];
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
