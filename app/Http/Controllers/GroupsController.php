@@ -25,7 +25,6 @@ class GroupsController extends Controller
             'name' => 'required|min:2|max:255|unique:groups,user_id',
             'description' => 'required|min:2',
         ]);
-
         $user = $request->user();
 
         return $this->createNewGroup($user, $validated);
@@ -34,7 +33,6 @@ class GroupsController extends Controller
     protected function createNewGroup(User $user, array $record)
     {
         $group = Group::create($record + ['user_id' => $user->id,]);
-
         $user->groups()->attach($group->id);
 
         return $group;

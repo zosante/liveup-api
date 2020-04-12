@@ -17,9 +17,7 @@ class GroupUserController extends Controller
     public function addGroupUser(Group $group, AddGroupUserRequest $request)
     {
         $user = $request->user();
-
         $user_id = $request->get('user_id');
-
         $group = $user->groups()->where(['group_id' => $group->id])->firstorFail();
 
         return tap($group, function ($group) use ($user_id) {
