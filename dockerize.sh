@@ -17,3 +17,5 @@ fi
 docker-compose exec app php artisan db:seed --class=UsersTableSeeder
 
 docker-compose exec app php artisan db:seed --class=SymptomsTableSeeder
+
+php artisan laravel-swagger:generate  --filter="/api" > swagger.json
