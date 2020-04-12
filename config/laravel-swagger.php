@@ -12,13 +12,13 @@ return [
     |
     */
 
-    'title' => env('APP_NAME'),
+    'title' => env('APP_NAME', 'LiveUp'),
 
     'description' => '',
 
     'appVersion' => '1.0.0',
 
-    'host' => env('APP_URL'),
+    'host' => env('APP_URL', 'localhost:8070'),
 
     'basePath' => '/',
 
