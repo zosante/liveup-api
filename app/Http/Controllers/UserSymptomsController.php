@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Symptom;
+use App\Services\SymptomRecordService;
 use App\User;
 use Illuminate\Http\Request;
 
 class UserSymptomsController extends Controller
 {
+    private SymptomRecordService $symptomRecordService;
+
+    public function __construct(SymptomRecordService $symptomRecordService)
+    {
+        $this->symptomRecordService = $symptomRecordService;
+    }
+
     public function getAll(Request $request)
     {
         return $request->user()->symptoms()->latest()->get();
@@ -85,5 +93,13 @@ class UserSymptomsController extends Controller
         return $user->symptomRecords()
             ->create($record + ['symptom_id' => $symptom->id,])
             ->load('symptom');
+    }
+
+    public function getLatestRecord(int $symptomId, Request $request)
+    {
+        return $this->symptomRecordService->getLatestRecord(
+            $request->user(),
+            $symptomId
+        );
     }
 }

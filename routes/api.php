@@ -37,6 +37,7 @@ Route::name('api.')->group(function () {
             Route::get('symptoms/{symptom}', 'UserSymptomsController@getOneFromList');
             Route::post('symptoms/{symptom}/records', 'UserSymptomsController@addSymptomRecord');
             Route::get('symptoms/{symptom}/records', 'UserSymptomsController@getSymptomRecords');
+            Route::get('symptoms/{symptom}/records/latest', 'UserSymptomsController@getLatestRecord');
         });
 
         Route::get('symptoms', 'SymptomsController@getAll');
