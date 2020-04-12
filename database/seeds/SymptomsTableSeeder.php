@@ -11,8 +11,9 @@ class SymptomsTableSeeder extends BaseSeeder
      */
     public function run()
     {
-        \App\Models\Symptom::create([
+        \App\Models\Symptom::updateOrcreate([
             'name' => $this->faker->name,
+        ], [
             'description' => $this->faker->sentence
         ]);
     }

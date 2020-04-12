@@ -13,7 +13,9 @@
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "mtrajano/laravel-swagger": "^0.6.3",
+        "phpdocumentor/reflection-docblock": "^4.3"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
