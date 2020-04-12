@@ -1,12 +1,18 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": null,
+        "title": "LiveUp",
         "description": "",
         "version": "1.0.0"
     },
-    "host": null,
+    "host": "localhost:8070",
     "basePath": "\/",
+    "consumes": [
+        "application\/json"
+    ],
+    "produces": [
+        "application\/json"
+    ],
     "paths": {
         "\/api\/user": {
             "get": {
@@ -88,6 +94,65 @@
                         "description": "OK"
                     }
                 }
+            }
+        },
+        "\/api\/user\/groups": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "get": {
+                "summary": "",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "\/api\/user\/groups\/{group}": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "group",
+                        "type": "string",
+                        "required": true,
+                        "description": ""
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "user_id"
+                            ],
+                            "properties": {
+                                "user_id": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "\/api\/user\/symptoms\/{symptom}": {
