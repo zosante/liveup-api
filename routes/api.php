@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,3 +56,5 @@ Route::name('api.')->group(function () {
         ];
     });
 });
+
+Route::fallback(fn() => response()->json(['message' => 'Resource path does not exist.'], Response::HTTP_NOT_FOUND));
