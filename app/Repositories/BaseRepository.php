@@ -50,4 +50,8 @@ abstract class BaseRepository
         return $this->findBy($attributes, $columns, true);
     }
 
+    public function load($relationship, $model)
+    {
+        return $model->load($relationship);
+    }
 }
