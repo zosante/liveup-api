@@ -49,8 +49,6 @@ jobs:
           name: Install MySQL CLI; Import dummy data; run an example query
           command: |
             sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u laravel -plaravel laravel < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u laravel -plaravel --execute="SELECT * FROM test_db.laravel"
 
       # prepare the database
       - run: php artisan migrate
