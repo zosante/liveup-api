@@ -49,7 +49,11 @@ jobs:
           name: Install MySQL CLI; Import dummy data; run an example query
           command: |
             sudo apt-get install default-mysql-client
-
+      - run:
+          name: "Create Environment file and generate app key"
+          command: |
+            cp .env.dockerizer.local .env
+            php artisan key:generate
       # prepare the database
       - run: php artisan migrate --force
 
