@@ -4,7 +4,6 @@
 #
 version: 2
 jobs:
-  jobs:
   build:
     docker:
       - image: circleci/php:7.4-apache-node-browsers # The primary container where steps are run
@@ -58,7 +57,3 @@ jobs:
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
-      - store_test_results:
-          path: tests/_output
-      - store_artifacts:
-          path: tests/_output
