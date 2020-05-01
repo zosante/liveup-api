@@ -51,10 +51,6 @@ jobs:
           command: |
             sudo apt-get install default-mysql-client
       - run:
-          name:
-          command: |
-            mysql -h 127.0.0.1 -ularavel -plaravel --execute="create database laravel"
-      - run:
           name: "Create Environment file and generate app key"
           command: |
             cp .env.dockerizer.local .env
