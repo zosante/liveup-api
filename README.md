@@ -24,9 +24,15 @@ Then navigate to `localhost:8070/api`
 
 Find `swagger.json` file in the root of the project's directory and visit: https://editor.swagger.io/
 
+#### Import from file
 - Click File -> Import File
 - Select `swagger.json` in the project's root directory
 - Click "Open"
+
+#### Import from URL
+- Click File -> Import Url
+- Paste this url: https://raw.githubusercontent.com/theliveup/liveup-api/master/swagger.json
+- Click "OK"
 
 Now you can use the Swagger doc to test request to the end points.
 
