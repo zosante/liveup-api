@@ -23,17 +23,9 @@ class GroupsController extends Controller
     public function create(AddGroupRequest $request)
     {
         $user = $request->user();
-        $input = ['description'=>$request->description,'name'=>$request->name];
-
-        return $this->createNewGroup($user, $input);
-    }
-
-    protected function createNewGroup(User $user, array $record)
-    {
-        $group = Group::create($record + ['user_id' => $user->id,]);
+        $group = Group::create($request->validated() + ['user_id' => $user->id,]);
         $user->groups()->attach($group->id);
 
         return $group;
     }
-
 }
