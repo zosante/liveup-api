@@ -51,7 +51,7 @@ jobs:
             sudo apt-get install default-mysql-client
 
       # prepare the database
-      - run: php artisan migrate
+      - run: php artisan migrate --force
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
