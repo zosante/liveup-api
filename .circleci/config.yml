@@ -4,24 +4,39 @@
 #
 version: 2
 jobs:
+  jobs:
   build:
     docker:
-      # Specify the version you desire here
-      - image: circleci/php:7.4-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      # 
-      # - image: redis:3
+      - image: circleci/php:7.4-apache-node-browsers # The primary container where steps are run
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: laravel
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: laravel
+          MYSQL_PASSWORD: laravel
 
     steps:
       - checkout
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u laravel -plaravel laravel < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u laravel -plaravel --execute="SELECT * FROM test_db.laravel"
 
-      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
+    steps:
+      - checkout
       - run: sudo docker-php-ext-install zip
 
       # Download and cache dependencies
@@ -56,8 +71,7 @@ jobs:
             - ~/.yarn
 
       # prepare the database
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: php artisan migrate
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
