@@ -29,7 +29,7 @@ Route::name('api.')->group(function () {
                 return $request->user();
             });
 
-            Route::post('groups', 'GroupsController@create');
+            Route::post('groups', 'GroupsController@create')->name('groups.create');
             Route::get('groups', 'GroupsController@getAll');
             Route::post('groups/{group}', 'GroupUserController@addGroupUser');
 
