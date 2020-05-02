@@ -63,6 +63,7 @@ jobs:
             cp .env.example .env
             php artisan key:generate
       # prepare the database
+      - run: php artisan migrate:install
       - run: php artisan migrate --force
 
       # run tests with phpunit or codecept
