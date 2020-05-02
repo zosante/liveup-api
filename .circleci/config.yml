@@ -1,0 +1,77 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.4-apache-node-browsers # The primary container where steps are run
+      - image: circleci/mysql:8.0.4
+        command: [--default-authentication-plugin=mysql_native_password]
+        environment:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_PASSWORD: liveup
+          MYSQL_DATABASE: liveup
+          MYSQL_USER: liveup
+          MYSQL_PASSWORD: liveup
+    steps:
+      - checkout
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
+      - run: sudo docker-php-ext-install zip pdo pdo_mysql
+       # Download and cache dependencies
+
+      # composer cache
+      - restore_cache:
+          keys:
+          # "composer.json" can be used if "composer.json"
+          # is not committed to the repository.
+          - v1-dependencies-{{ checksum "composer.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install default-mysql-client
+      - run:
+          name: "Create Environment file and generate app key"
+          command: |
+            cp .env.example .env
+            php artisan key:generate
+      # prepare the database
+      - run: php artisan migrate:install
+      - run: php artisan migrate --force
+
+      # run tests with phpunit or codecept
+      - run: ./vendor/bin/phpunit
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
