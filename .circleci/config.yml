@@ -10,6 +10,7 @@ jobs:
       - image: circleci/mysql:8.0.4
         command: [--default-authentication-plugin=mysql_native_password]
         environment:
+          MYSQL_HOST: 127.0.0.1
           MYSQL_ROOT_PASSWORD: liveup
           MYSQL_DATABASE: liveup
           MYSQL_USER: liveup
