@@ -10,10 +10,10 @@ jobs:
       - image: circleci/mysql:8.0.4
         command: [--default-authentication-plugin=mysql_native_password]
         environment:
-          MYSQL_ROOT_PASSWORD: laravel
-          MYSQL_DATABASE: laravel
-          MYSQL_USER: laravel
-          MYSQL_PASSWORD: laravel
+          MYSQL_ROOT_PASSWORD: liveup
+          MYSQL_DATABASE: liveup
+          MYSQL_USER: liveup
+          MYSQL_PASSWORD: liveup
     steps:
       - checkout
       - run:
