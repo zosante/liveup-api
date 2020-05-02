@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddGroupRequest;
 use App\Models\Group;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,23 +20,12 @@ class GroupsController extends Controller
         return $request->user()->groups()->get();
     }
 
-    public function create(Request $request)
+    public function create(AddGroupRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|min:2|max:255|unique:groups,user_id',
-            'description' => 'required|min:2',
-        ]);
         $user = $request->user();
-
-        return $this->createNewGroup($user, $validated);
-    }
-
-    protected function createNewGroup(User $user, array $record)
-    {
-        $group = Group::create($record + ['user_id' => $user->id,]);
+        $group = Group::create($request->validated() + ['user_id' => $user->id,]);
         $user->groups()->attach($group->id);
 
         return $group;
     }
-
 }

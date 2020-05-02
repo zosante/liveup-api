@@ -43,7 +43,7 @@ Branch out from the main `master` branch with prefix e.g `feature/`, `bugfix/` a
 ### Interaction usage
 Simply exec a terminal to interact with the docker container using
 
-- `docker-compose exec bash` or
-- `docker-compose exec sh` or
+- `docker-compose exec app bash` or
+- `docker-compose exec appi sh`
 
 > PS: These commands works on Unix systems only.
