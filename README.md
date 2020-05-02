@@ -1,3 +1,10 @@
+
+<div align="center">
+
+[![LiveUp API](https://circleci.com/gh/theliveup/liveup-api/tree/master.svg?style=shield)](https://circleci.com/gh/theliveup/liveup-api/tree/master)
+
+</div>
+
 ## About LiveUp
 
 API that provides the logic for the liveup-app
