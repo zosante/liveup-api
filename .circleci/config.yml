@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Wait for db
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
-      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install zip pdo pdo_mysql
        # Download and cache dependencies
 
       # composer cache
