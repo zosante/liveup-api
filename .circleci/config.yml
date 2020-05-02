@@ -53,7 +53,7 @@ jobs:
       - run:
           name: "Create Environment file and generate app key"
           command: |
-            cp .env.dockerizer.local .env
+            cp .env.example .env
             php artisan key:generate
       # prepare the database
       - run: php artisan migrate --force
