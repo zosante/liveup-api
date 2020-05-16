@@ -18,12 +18,12 @@ class AddGroupRequest extends FormRequest
                 'required',
                 'min:2',
                 'max:255',
-                'unique:groups,user_id'
+                'unique:groups,user_id',
             ],
             'description' => [
                 'required',
-                'min:2'
-            ]
+                'min:2',
+            ],
         ];
     }
 }

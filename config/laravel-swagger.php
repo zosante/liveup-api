@@ -12,14 +12,14 @@ return [
     |
     */
 
-//    'title' => env('APP_NAME', 'LiveUp'),
+    //    'title' => env('APP_NAME', 'LiveUp'),
     'title' => 'LiveUp',
 
     'description' => '',
 
     'appVersion' => '1.0.0',
 
-//    'host' => env('APP_URL', 'localhost:8070'),
+    //    'host' => env('APP_URL', 'localhost:8070'),
     'host' => 'localhost:8070',
 
     'basePath' => '/',
@@ -30,11 +30,11 @@ return [
     ],
 
     'consumes' => [
-         'application/json',
+        'application/json',
     ],
 
     'produces' => [
-         'application/json',
+        'application/json',
     ],
 
     /*

@@ -18,7 +18,7 @@ class SymptomRecordService
     public function getLatestRecord(User $user, int $symptomId): SymptomRecord
     {
         return $this->symptomRecordRepository->getLatestWithSymptom($user, [
-            'symptom_id' => $symptomId
+            'symptom_id' => $symptomId,
         ]);
     }
 }
