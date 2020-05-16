@@ -2,10 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Services\UserService;
+use App\Models\Group;
 use App\User;
 use Faker\Generator as Faker;
-use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +17,10 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Group::class, function (Faker $faker) {
     return [
-        'name'              => $faker->name,
-        'email'             => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'api_token'         => UserService::generateHashed(UserService::getRandomToken()),
-        'remember_token'    => Str::random(10),
+        'name'        => $faker->name,
+        'user_id'     => factory(User::class)->create()->id,
+        'description' => $faker->text,
     ];
 });

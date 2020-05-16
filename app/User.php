@@ -2,16 +2,15 @@
 
 namespace App;
 
+use App\Models\Group;
 use App\Models\Symptom;
 use App\Models\SymptomRecord;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Group;
 
 /**
- * Class User
- * @package App
+ * Class User.
  *
  * @property string $api_token
  */
@@ -51,6 +50,6 @@ class User extends Authenticatable
 
     public function groups()
     {
-        return $this->belongsToMany( Group::class,"group_user");
+        return $this->belongsToMany(Group::class, 'group_user');
     }
 }

@@ -10,8 +10,9 @@ class ForceJson
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @param array $guards
+     * @param \Closure                 $next
+     * @param array                    $guards
+     *
      * @return mixed
      */
     public function handle($request, Closure $next, ...$guards)

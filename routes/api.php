@@ -24,6 +24,9 @@ Route::name('api.')->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::post('token/refresh', 'ApiTokenController@refresh');
 
+        Route::get('users/{user}/records', 'RecordController@getUserRecords')
+            ->name('users.records');
+
         Route::prefix('user')->name('user.')->group(function () {
             Route::get('', function (Request $request) {
                 return $request->user();
@@ -46,16 +49,16 @@ Route::name('api.')->group(function () {
 
     Route::get('/', function () {
         return [
-            'Welcome to LiveUp API. Please check documentations or test you are connected with /api/tests endpoints.'
+            'Welcome to LiveUp API. Please check documentations or test you are connected with /api/tests endpoints.',
         ];
     });
 
     Route::any('tests', function (Request $request) {
         return [
             'method' => $request->method(),
-            'data' => $request->all()
+            'data'   => $request->all(),
         ];
     });
 });
 
-Route::fallback(fn() => response()->json(['message' => 'Resource path does not exist.'], Response::HTTP_NOT_FOUND));
+Route::fallback(fn () => response()->json(['message' => 'Resource path does not exist.'], Response::HTTP_NOT_FOUND));

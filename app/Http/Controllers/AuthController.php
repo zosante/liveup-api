@@ -12,8 +12,8 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validated = $this->validate($request, [
-            'name' => 'required|string|min:2|max:255',
-            'email' => 'required|max:255|email|unique:users,email',
+            'name'     => 'required|string|min:2|max:255',
+            'email'    => 'required|max:255|email|unique:users,email',
             'password' => 'required|min:2|max:60',
         ]);
 
@@ -22,15 +22,15 @@ class AuthController extends Controller
         $user = $this->create($validated);
 
         return response()->json([
-            'user' => $user,
-            'token' => $validated['token']
+            'user'  => $user,
+            'token' => $validated['token'],
         ]);
     }
 
     public function login(Request $request)
     {
         $validated = $this->validate($request, [
-            'email' => 'email|exists:users,email',
+            'email'    => 'email|exists:users,email',
             'password' => 'required|min:2|max:60',
         ], ['*' => 'email or password is invalid']);
 
@@ -39,13 +39,13 @@ class AuthController extends Controller
 
         if (!Hash::check($validated['password'], $user->password)) {
             return response()->json([
-                'error' => 'email or password is invalid'
+                'error' => 'email or password is invalid',
             ], 401);
         }
 
         return response()->json([
-            'user' => $user,
-            'token' => $this->updateUserToken($user)
+            'user'  => $user,
+            'token' => $this->updateUserToken($user),
         ]);
     }
 
@@ -73,9 +73,9 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => Hash::make($data['password']),
             'api_token' => $this->generateHashed($data['token']),
         ]);
     }

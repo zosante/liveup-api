@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: ayobami
  * Date: 4/11/2020
- * Time: 3:31 PM
+ * Time: 3:31 PM.
  */
 
 namespace App\Http\Controllers;
-
 
 use App\Http\Requests\AddGroupUserRequest;
 use App\Models\Group;
