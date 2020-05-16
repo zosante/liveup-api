@@ -24,7 +24,7 @@ Route::name('api.')->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::post('token/refresh', 'ApiTokenController@refresh');
 
-        Route::get('users/{user_id}/records', 'RecordController@getUserRecords')
+        Route::get('users/{user}/records', 'RecordController@getUserRecords')
             ->name('users.records');
 
         Route::prefix('user')->name('user.')->group(function () {
