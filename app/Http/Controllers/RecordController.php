@@ -30,6 +30,6 @@ class RecordController extends Controller
 
         abort_if($count < 2, Response::HTTP_FORBIDDEN);
 
-        return $user->symptomRecords;
+        return $user->symptomRecords->groupBy('symptom_id');
     }
 }
