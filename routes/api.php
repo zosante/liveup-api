@@ -24,6 +24,9 @@ Route::name('api.')->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::post('token/refresh', 'ApiTokenController@refresh');
 
+        Route::get('users/{user_id}/records', 'RecordController@getUserRecords')
+            ->name('users.records');
+
         Route::prefix('user')->name('user.')->group(function () {
             Route::get('', function (Request $request) {
                 return $request->user();
@@ -32,6 +35,7 @@ Route::name('api.')->group(function () {
             Route::post('groups', 'GroupsController@create')->name('groups.create');
             Route::get('groups', 'GroupsController@getAll');
             Route::post('groups/{group}', 'GroupUserController@addGroupUser');
+
 
             Route::get('symptoms', 'UserSymptomsController@getAll');
             Route::get('symptoms/{symptom}', 'UserSymptomsController@getOneFromList');

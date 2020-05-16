@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Groups;
+namespace Tests\Feature\Group;
 
 use App\User;
 use Illuminate\Foundation\Testing\WithFaker;
