@@ -19,7 +19,7 @@ class RecordController extends Controller
         $request->validate([
             'group_id' => [
                 'required',
-                'exists:groups,id'
+                'exists:groups,id',
             ],
         ]);
 
