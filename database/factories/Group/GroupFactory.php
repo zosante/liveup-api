@@ -19,8 +19,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Group::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'user_id' => factory(User::class)->create()->id,
+        'name'        => $faker->name,
+        'user_id'     => factory(User::class)->create()->id,
         'description' => $faker->text,
     ];
 });

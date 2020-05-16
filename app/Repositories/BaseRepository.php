@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class BaseRepository
 {
     /**
-     * @var Model $model
+     * @var Model
      */
     protected $model;
 

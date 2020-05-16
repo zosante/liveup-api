@@ -24,7 +24,7 @@ class UserSymptomsController extends Controller
     public function getOneFromList($symptomId, Request $request)
     {
         $validated = $request->validate([
-            'severity' => 'nullable|int|between:0,10',
+            'severity'     => 'nullable|int|between:0,10',
             'with_records' => 'nullable|bool',
         ]);
 
@@ -32,10 +32,8 @@ class UserSymptomsController extends Controller
         $symptom = $user->symptoms()->findOrFail($symptomId);
 
         return tap($symptom, function ($query) use ($user, $validated) {
-
             if ($validated['with_records'] ?? false) {
                 $query->load(['records' => function ($query) use ($user, $validated) {
-
                     $query->where(['user_id' => $user->id]);
 
                     if ($validated['severity'] ?? false) {
@@ -72,8 +70,8 @@ class UserSymptomsController extends Controller
     public function addSymptomRecord(Symptom $symptom, Request $request)
     {
         $validated = $request->validate([
-            'severity' => 'required|int|between:0,10',
-            'started_at' => 'nullable|date_format:Y-m-d H:i'
+            'severity'   => 'required|int|between:0,10',
+            'started_at' => 'nullable|date_format:Y-m-d H:i',
         ]);
 
         if (!$request->user()
@@ -91,7 +89,7 @@ class UserSymptomsController extends Controller
     protected function createSymptomRecord(User $user, Symptom $symptom, array $record)
     {
         return $user->symptomRecords()
-            ->create($record + ['symptom_id' => $symptom->id,])
+            ->create($record + ['symptom_id' => $symptom->id])
             ->load('symptom');
     }
 

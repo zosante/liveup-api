@@ -36,7 +36,6 @@ Route::name('api.')->group(function () {
             Route::get('groups', 'GroupsController@getAll');
             Route::post('groups/{group}', 'GroupUserController@addGroupUser');
 
-
             Route::get('symptoms', 'UserSymptomsController@getAll');
             Route::get('symptoms/{symptom}', 'UserSymptomsController@getOneFromList');
             Route::post('symptoms/{symptom}/records', 'UserSymptomsController@addSymptomRecord');
@@ -50,16 +49,16 @@ Route::name('api.')->group(function () {
 
     Route::get('/', function () {
         return [
-            'Welcome to LiveUp API. Please check documentations or test you are connected with /api/tests endpoints.'
+            'Welcome to LiveUp API. Please check documentations or test you are connected with /api/tests endpoints.',
         ];
     });
 
     Route::any('tests', function (Request $request) {
         return [
             'method' => $request->method(),
-            'data' => $request->all()
+            'data'   => $request->all(),
         ];
     });
 });
 
-Route::fallback(fn() => response()->json(['message' => 'Resource path does not exist.'], Response::HTTP_NOT_FOUND));
+Route::fallback(fn () => response()->json(['message' => 'Resource path does not exist.'], Response::HTTP_NOT_FOUND));
