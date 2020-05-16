@@ -13,12 +13,12 @@ class GroupsTest extends FeatureTestCase
     public function testCreateGroupSuccess()
     {
         $this->actingAs(factory(User::class)->create())
-            ->postJson(route('api.user.groups.create'),[
-                'name' => $this->faker->firstName,
+            ->postJson(route('api.user.groups.create'), [
+                'name'        => $this->faker->firstName,
                 'description' => $this->faker->sentence(30),
             ])
             ->assertJsonStructure([
-                'id', 'name'
+                'id', 'name',
             ])
             ->assertCreated();
     }

@@ -18,7 +18,7 @@ class SymptomsController extends Controller
     public function getAll()
     {
         /**
-         * Getting models through a service class
+         * Getting models through a service class.
          */
         return $this->symptomService->getAll();
     }
@@ -26,16 +26,16 @@ class SymptomsController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:2|max:255|unique:symptoms,name',
+            'name'        => 'required|min:2|max:255|unique:symptoms,name',
             'description' => 'nullable|min:2',
         ]);
 
         $data = $request->only([
-            'name', 'description'
+            'name', 'description',
         ]);
 
         /**
-         * Accessing model directly
+         * Accessing model directly.
          */
         return Symptom::create($data);
     }

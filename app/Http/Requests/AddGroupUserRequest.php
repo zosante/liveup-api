@@ -27,16 +27,16 @@ class AddGroupUserRequest extends FormRequest
             'user_id' => [
                 'required',
                 'int',
-                'not_in:' . $this->user()->id,
-                'exists:users,id'
-            ]
+                'not_in:'.$this->user()->id,
+                'exists:users,id',
+            ],
         ];
     }
 
     public function messages()
     {
         return [
-          'user_id.not_in' => 'You cannot re-add yourself to the group'
+            'user_id.not_in' => 'You cannot re-add yourself to the group',
         ];
     }
 }

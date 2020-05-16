@@ -14,7 +14,7 @@ class SymptomsTableSeeder extends BaseSeeder
         \App\Models\Symptom::updateOrcreate([
             'name' => $this->faker->name,
         ], [
-            'description' => $this->faker->sentence
+            'description' => $this->faker->sentence,
         ]);
     }
 }
